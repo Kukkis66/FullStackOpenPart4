@@ -118,7 +118,7 @@ describe('most liked', () => {
         }  
       ]
 
-    test('total amount of likes should be 12', () => {
+    test('most liked blog should be Canonical string reduction with 12 likes', () => {
         const result = listHelper.mostFavourite(blogs)
         expect(result).toEqual({
             title: "Canonical string reduction",
