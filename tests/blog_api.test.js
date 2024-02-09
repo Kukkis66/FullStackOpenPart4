@@ -1,25 +1,30 @@
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
+const mongoose = require("mongoose");
+const supertest = require("supertest");
+const app = require("../app");
 
-const api = supertest(app)
+const api = supertest(app);
 
-test('blogs are returned as json', async () => {
- await api
-    .get('/api/blogs')
+test("blogs are returned as json", async () => {
+  await api
+    .get("/api/blogs")
     .expect(200)
-    .expect('Content-Type', /application\/json/)
-    
-})
+    .expect("Content-Type", /application\/json/);
+});
 
-test('bloglist is empty', async () => {
-    const response = await api.get('/api/blogs')
-  
-    expect(response.body).toHaveLength(0)
-  })
-  
+test("bloglist is empty", async () => {
+  const response = await api.get("/api/blogs");
 
+  expect(response.body).toHaveLength(0);
+});
+
+test("identifier are id", async () => {
+  const response = await api.get("/api/blogs");
+
+  response.body.forEach((blog) => {
+    expect(blog.id).toBeDefined();
+  });
+});
 
 afterAll(async () => {
-  await mongoose.connection.close()
-})
+  await mongoose.connection.close();
+});
